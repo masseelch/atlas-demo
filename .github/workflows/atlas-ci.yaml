@@ -27,7 +27,7 @@ jobs:
         with:
           dir: 'migrations'
           dev-url: mssql://sa:myStrongPassword!@localhost:1433/dev
-          cloud-token: ${{ secrets.ARIGA_TOKEN }}
+          cloud-token: ${{ secrets.ATLAS_TOKEN }}
   #sync:
   #  needs: lint
   #  if: github.ref == 'refs/heads/main'
