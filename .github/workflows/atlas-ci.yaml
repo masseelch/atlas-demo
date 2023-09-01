@@ -7,8 +7,6 @@ on:
       - main
   # Run on PRs where something changed under the `path/to/migration/dir/` directory.
   pull_request:
-    paths:
-      - 'migrations/*'
 jobs:
   lint:
     services:
