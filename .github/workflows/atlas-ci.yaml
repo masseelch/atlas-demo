@@ -14,18 +14,12 @@ jobs:
     services:
       # Spin up a mysql:8.0.29 container to be used as the dev-database for analysis.
       mysql:
-        image: mysql:8.0.29
+        image: mcr.microsoft.com/mssql/server
         env:
-          MYSQL_ROOT_PASSWORD: pass
-          MYSQL_DATABASE: dev
+          MSSQL_SA_PASSWORD: myStrongPassword!
+          ACCEPT_EULA: Y
         ports:
-          - "3306:3306"
-        options: >-
-          --health-cmd "mysqladmin ping -ppass"
-          --health-interval 10s
-          --health-start-period 10s
-          --health-timeout 5s
-          --health-retries 10
+          - "1433:1433"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.1
@@ -34,8 +28,8 @@ jobs:
       - uses: ariga/atlas-action@v0
         with:
           dir: 'migrations'
-          dev-url: mysql://root:pass@localhost:3306/dev
-          ariga-token: ${{ secrets.ARIGA_TOKEN }}
+          dev-url: mssql://sa:myStrongPassword!@localhost:1433/dev
+          # ariga-token: ${{ secrets.ARIGA_TOKEN }}
   sync:
     needs: lint
     if: github.ref == 'refs/heads/main'
