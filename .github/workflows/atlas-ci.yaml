@@ -27,15 +27,15 @@ jobs:
         with:
           dir: 'migrations'
           dev-url: mssql://sa:myStrongPassword!@localhost:1433/dev
-          # ariga-token: ${{ secrets.ARIGA_TOKEN }}
-  sync:
-    needs: lint
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ariga/atlas-sync-action@v0
-        with:
-          dir: 'migrations'
-          driver: mysql # or: postgres | sqlite
           cloud-token: ${{ secrets.ARIGA_TOKEN }}
+  #sync:
+  #  needs: lint
+  #  if: github.ref == 'refs/heads/main'
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v3
+  #    - uses: ariga/atlas-sync-action@v0
+  #      with:
+  #        dir: 'migrations'
+  #        driver: mysql # or: postgres | sqlite
+  #        cloud-token: ${{ secrets.ARIGA_TOKEN }}
